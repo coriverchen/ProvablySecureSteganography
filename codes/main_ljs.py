@@ -64,6 +64,7 @@ def synthesize(speaker_id, text, sigma=0.5, n_frames=500,payload=0.5):
     z , log_s_list, log_det_W_list  = waveglow((mels, audio))
   
   z2 = torch.cuda.FloatTensor(z.shape).normal_()
+  # embed message
   with torch.no_grad():
       audio_out = waveglow.reverse_audio_true((mels, z2)) 
       audio_out = audio_out.detach()
